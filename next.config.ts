@@ -1,5 +1,4 @@
 import type { NextConfig } from "next";
-
 const nextConfig: NextConfig = {
   /* config options here */
   cacheComponents: true,
@@ -12,6 +11,25 @@ const nextConfig: NextConfig = {
       },
     },
   },
+  
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+      },
+    ],
+  },
 };
 
 export default nextConfig;
+
+// const nextConfig: NextConfig = {
+//   images: {
+//     remotePatterns: [
+//       { protocol: "https", hostname: "res.cloudinary.com" },
+//     ],
+//   },
+// };
+
+// export default nextConfig;

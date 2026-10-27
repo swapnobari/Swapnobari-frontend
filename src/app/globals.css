@@ -1,26 +1,116 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #fbf9f6;
+  --fg: #15173b;
+  --muted: #5b5d7a;
+  --brand: #2e3192;       /* logo navy */
+  --brand-deep: #1b1d5c;  /* dark sections: menu, footer, preloader */
+  --accent: #ac1f29;      /* logo crimson */
+  --accent-bright: #ed1c24;
+  --line: rgba(21, 23, 59, 0.14);
+
+  color-scheme: light;
+  --bg: #fbf9f6;
+  /* ...the rest stays the same... */
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-brand: var(--brand);
+  --color-brand-deep: var(--brand-deep);
+  --color-accent: var(--accent);
+  --color-accent-bright: var(--accent-bright);
+  --color-line: var(--line);
+
+  /* Latin glyphs come from the first font, Bangla falls through to the second */
+  --font-sans: var(--font-en-ui), system-ui, sans-serif;
+  --font-display: var(--font-en-accent), Georgia, serif;
+  --font-accent: var(--font-en-accent), Georgia, serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: var(--bg);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.7;
+}
+
+::selection {
+  background: var(--accent);
+  color: #fff;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee 35s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* Styles for real HTML content coming from the API */
+.rich p { margin-top: 1em; }
+.rich h2, .rich h3 { font-family: var(--font-display); font-size: 1.6rem; margin-top: 2em; }
+.rich ul { list-style: disc; padding-left: 1.25rem; margin-top: 1em; }
+.rich ol { list-style: decimal; padding-left: 1.25rem; margin-top: 1em; }
+.rich a { color: var(--accent); text-decoration: underline; }
+
+button:not(:disabled),
+[role="button"],
+a[href],
+summary,
+select {
+  cursor: pointer;
+}
+
+@keyframes hero-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+
+
+@keyframes banner-zoom {
+  from {
+    transform: scale(1.12);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.banner-img {
+  animation: banner-zoom 2.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .banner-img {
+    animation: none;
+  }
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
